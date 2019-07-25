@@ -127,7 +127,45 @@ Use Case:
 
 __Using Labels for Services, Deployment__
 
+To add labels to pods, apply `yaml` file config as follows:
 
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: <namespace>
+  labels:
+    <key-label>: <value-label>
+```
+
+```
+kubectl apply -f <file.yaml>
+```
+
+To get pods filtered by `labels`:
+
+
+```
+# Query by one label
+kubectl get pods -l <label-key>=<label-value> --show-label
+kubectl get pods --selector <label-key>=<label-value> --show-label
+
+# Query by multiple labels
+kubectl get pods -l "<label-key>=<label-value>,<lable-key>=<label-value>,..." --show-label
+```
+
+To edit existing labels in pod:
+
+```
+# Replace an existing labels
+kubectl label pod <pod-name> <label-key>=<label-value> --overwrite
+
+# Add new labels
+kubectl label pod <pod-name> <label-key>=<label-value>
+
+# Label all
+kubectl label pod --all <label-key>=<label-value>
+```
 
 *2. Namespaces*
 
@@ -175,3 +213,57 @@ kubectl delete -all --namespace <namespace>
 
 Controller has a concept named `ReplicaSet` to define numbers of stable pods in running time. this will be used to maintain numnber of stable idential pods at a given time.
 
+* ReplicaSet
+
+ReplicaSet is managed by Deployment, which provide an efficient ways to deployment multiple instances of applications. ReplicaSet is define in pods by specifing `metadata.ownerReferences`
+
+__The main benefits of `ReplicaSet` is that it ensures a number of instances will be maintained at a given time.__
+
+
+* Pod
+
+Pod is like a unit container that can run one or multiple application which is managed by cluster.
+
+To get pod and theirs IPs.
+
+```
+kubectl get pod -o wide
+```
+
+```
+kubectl describe endpoints <pod-name>
+```
+
+To access a pod in bash
+
+```
+kubectl exec -it <pod-name> --container <container-name> -- /bin/bash/
+```
+
+Forward port 
+
+```
+## `&` here mean try to run in iteractive mode
+kubectl port-forward <pod-name> <external-port>:<internal-port> &
+```
+
+* Configuration and Data Persistences are managed externally.
+```
+fb - bring process to foreground
+```
+
+Status of Pod
+
+```
+A Pod is considered ready when all containers are ready
+```
+
+
+`Pod Health`: 
+Liveliness: Check to restart containers.
+Readiness: Check live application and remove container from load-balance.
+Exec (Exit code), tcpSocket (connection successful), httpGet (Code 200,...)
+
+```
+kubectl get event --watch &
+```
