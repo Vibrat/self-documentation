@@ -106,10 +106,12 @@ kubectl get deployments
 to delete deployments:
 
 ```
-kubectl delete deplployment <deployment-name>
+kubectl delete deployment <deployment-name>
 ```
 
 #### Managing Objects with Labels, Annotations, Namespaces
+
+*1. Labels*
 
 Labels are used to :
 
@@ -123,7 +125,11 @@ Use Case:
 * Labels are used to group resources to be called
 * Annotations are used when adding meanings and descriptions on resources.
 
-*1. Namespaces*
+__Using Labels for Services, Deployment__
+
+
+
+*2. Namespaces*
 
 Can be called `virual cluster`
 
@@ -164,3 +170,8 @@ kubectl delete -all --namespace <namespace>
 ```
 
 `important`: This í a different between pods and deployments.
+
+*3. Controller*
+
+Controller has a concept named `ReplicaSet` to define numbers of stable pods in running time. this will be used to maintain numnber of stable idential pods at a given time.
+
