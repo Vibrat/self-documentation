@@ -84,3 +84,83 @@ kubectl proxy --port=8080
 *1. Service Account*
 
 Kubernetes recommend to use their default authentication `Service Account`. Everytime user access APIServer it means that they're authorized by one of the accepted users (for example `admin` or `default`). 
+
+* To get  a list of service account, type `kubectl get serviceAccounts`
+
+*2. Create a Deployment*
+
+Deployment in Kubernetes is a plan that actually run application and helps to scale with features `healthcheck`, `replicas`, `load-balancing`.
+
+To create a deployment with `yaml`:
+
+```
+kubectl apply -f <filename.yaml>
+```
+
+To get deployments information:
+
+```
+kubectl get deployments
+```
+
+to delete deployments:
+
+```
+kubectl delete deplployment <deployment-name>
+```
+
+#### Managing Objects with Labels, Annotations, Namespaces
+
+Labels are used to :
+
+* Managing Services
+* Managing Deployments
+* Managing Scheduling
+
+Use Case:
+
+* Namespaces are used to group resources based on functioning, security,...
+* Labels are used to group resources to be called
+* Annotations are used when adding meanings and descriptions on resources.
+
+*1. Namespaces*
+
+Can be called `virual cluster`
+
+* Security for Role-based Controls.
+* Naming Boundary
+* A resource can be in only one namespace.
+
+To get namespace, type `kubectl get namespaces`
+
+To create a namespace based on `yaml`:
+
+```
+cat > name-space.create.yaml >>EOF
+
+apiVerion: v1
+kind: Namespace
+metadata:
+    name: <new-namespace>
+
+----
+apiVersion: apps/v1
+....
+EOF
+```
+
+Then run `kubectl apply -f name-space.create.yaml`
+
+or create namespace by cli:
+
+```
+kubectl create namespace `name-space`
+```
+
+To delete pods in namespace:
+
+```
+kubectl delete -all --namespace <namespace>
+```
+
+`important`: This í a different between pods and deployments.
