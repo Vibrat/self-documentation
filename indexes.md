@@ -11,3 +11,9 @@
 [> 3.2 Authentication](kurbenetes.md#$authentication) 
 
 [> 3.3 Managing Kubernetes](kurbenetes.md#managing-objects-with-labels-annotations-namespaces)
+
+[>> 3.3.1 Labels](kurbenetes.md#labels)
+
+[>> 3.3.2 Namespaces](kurbenetes.md#namespaces)
+
+[>> 3.3.3 Controller](kubernetes.md#controllers)

@@ -171,7 +171,7 @@ kubectl delete -all --namespace <namespace>
 
 `important`: This í a different between pods and deployments.
 
-*3. Controller*
+*3. Controllers*
 
 Controller has a concept named `ReplicaSet` to define numbers of stable pods in running time. this will be used to maintain numnber of stable idential pods at a given time.
 
