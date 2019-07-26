@@ -86,6 +86,222 @@ kubectl proxy --port=8080
 Kubernetes recommend to use their default authentication `Service Account`. Everytime user access APIServer it means that they're authorized by one of the accepted users (for example `admin` or `default`). 
 
 * To get  a list of service account, type `kubectl get serviceAccounts`
+* `Yaml Config` for serviceAccounts is `spec.serviceAccountName`.
+* To opt out from automated serviceAccount, set `automountServiceAccountToken: false`, below is an example:
+
+```
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: build-robot
+automountServiceAccountToken: false
+...
+```
+
+##### How Service Account work
+
+Every namespace has a `default` service account named `default`. 
+
+To create a `Service Account`, apply this config file.
+
+```
+kubectl apply -f <<EOF
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: <new-name-service-account>
+...
+EOF
+```
+
+To check if the `new Service Account` is created, 
+
+```
+kubectl get serviceAccounts/<new-name-service-account> -o yaml
+```
+
+The output will be like:
+
+```
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: 2015-06-16T00:12:59Z
+  name: build-robot
+  namespace: default
+  resourceVersion: "272500"
+  selfLink: /api/v1/namespaces/default/serviceaccounts/build-robot
+  uid: 721ab723-13bc-11e5-aec2-42010af0021e
+secrets:
+- name: build-robot-token-bvbk5
+```
+
+To delete a `Service Account`,
+
+```
+kubectl delete serviceAccounts/<service-account-name>
+```
+
+To create a `sercret` for serviceAccounts:
+
+```
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Secret
+metadata:
+  name: build-robot-secret
+  annotations:
+    kubernetes.io/service-account.name: build-robot
+type: kubernetes.io/service-account-token
+EOF
+```
+
+To describe secret
+
+```
+kubectl describe secrets/build-robot-secret
+```
+
+Output will be like: 
+
+```
+Name:           build-robot-secret
+Namespace:      default
+Labels:         <none>
+Annotations:    kubernetes.io/service-account.name=build-robot
+                kubernetes.io/service-account.uid=da68f9c6-9d26-11e7-b84e-002dc52800da
+
+Type:   kubernetes.io/service-account-token
+
+Data
+====
+ca.crt:         1338 bytes
+namespace:      7 bytes
+token:          ...
+```
+ 
+*Permissions Adding*
+
+To grant only `view` permission to service account `my-sa` within namepsace `my-namespace`
+
+```
+kubectl create rolebinding my-sa-view \
+  --clusterrole=view \
+  --serviceaccount=my-namespace:my-sa \
+  --namespace=my-namespace
+```
+
+To grant a group permissions for a namespace:
+
+```
+kubectl create rolebinding serviceaccounts-view \
+  --clusterrole=view \
+  --group=system:serviceaccounts:my-namespace \
+  --namespace=my-namespace
+```
+
+to grant `super` access permissions to all account in `Service Account`: 
+
+```
+kubectl create clusterrolebinding serviceaccounts-cluster-admin \
+  --clusterrole=cluster-admin \
+  --group=system:serviceaccounts
+```
+
+to grant permissions to a `namespace`:
+
+```
+kubectl create clusterrolebinding serviceaccounts-view \
+  --clusterrole=view \
+ --group=system:serviceaccounts
+```
+
+##### Using RBAC Authorization
+
+* Step 1: Create Role/ Cluster Role:
+
+```
+# Create a Role and give Core API, permissions: get, watch, list
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: pod-reader
+rules:
+- apiGroups: [""] # "" indicates the core API group
+  resources: ["pods"]
+  verbs: ["get", "watch", "list"]
+
+
+# Create a cluster role to access to secrets resource
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  # "namespace" omitted since ClusterRoles are not namespaced
+  name: secret-reader
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get", "watch", "list"]
+
+```
+
+* Step 2: Add user to Role or ClusterRole:
+
+```
+# Add user to role
+apiVersion: rbac.authorization.k8s.io/v1
+# This role binding allows "jane" to read pods in the "default" namespace.
+kind: RoleBinding
+metadata:
+  name: read-pods
+  namespace: default
+subjects:
+- kind: User
+  name: jane # Name is case sensitive
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role #this must be Role or ClusterRole
+  name: pod-reader # this must match the name of the Role or ClusterRole you wish to bind to
+  apiGroup: rbac.authorization.k8s.io
+
+# Add user to a cluster role
+apiVersion: rbac.authorization.k8s.io/v1
+# This role binding allows "dave" to read secrets in the "development" namespace.
+kind: RoleBinding
+metadata:
+  name: read-secrets
+  namespace: development # This only grants permissions within the "development" namespace.
+subjects:
+- kind: User
+  name: dave # Name is case sensitive
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: secret-reader
+  apiGroup: rbac.authorization.k8s.io
+```
+
+to grant permissions to a group use `ClusterRoleBinding`:
+
+```
+apiVersion: rbac.authorization.k8s.io/v1
+# This cluster role binding allows anyone in the "manager" group to read secrets in any namespace.
+kind: ClusterRoleBinding
+metadata:
+  name: read-secrets-global
+subjects:
+- kind: Group
+  name: manager # Name is case sensitive
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: secret-reader
+  apiGroup: rbac.authorization.k8s.io
+```
+
+*Important*: To change which `Role` or `ClusterRole` an object is binding to, please delete and create a new similar object.
 
 *2. Create a Deployment*
 
