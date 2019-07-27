@@ -2,10 +2,17 @@
 
 Kubernetes is server orchestra that helps to deploy and scale app easily with the concept of `containerization`:
 
-* Support Network Config.
-* Seperate Node Management.
-* Easily to Scale (create replica and load balancing), health check.
-* Config management for deployment.
+* Container Orchestrator
+* Workload Placement
+* Infrastructure Abstraction
+* Desired State
+
+Advanteges:
+
+* Speed of deployment.
+* Absorb changes quickly.
+* Recover quickly.
+* Hide complexity in the cluster.
 
 ### Kubernetes Features
 
