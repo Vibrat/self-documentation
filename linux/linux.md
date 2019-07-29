@@ -41,3 +41,27 @@ groups
 ```
 setfacl-m u:<username>:rwx <directory|file>
 ```
+
+* ssh how to set up
+
+Create a ssh key:
+
+```bash
+# Work on both window and linux
+ssh-keygen
+```
+
+Copy public key to remote server, your server should install `openssh-server`
+```
+## On windows please use Git Command Line
+ssh-copy-id -i <identity-key> <user>@<server-ip>
+```
+
+Now you can start using 
+
+```
+ssh <user>@<server-ip>
+```
+
+
+
