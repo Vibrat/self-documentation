@@ -43,6 +43,10 @@ Kubernetes offers replicas, load balance, restart, health check, Rollouts and Ro
 
 This page contains information on step by step to get started with kubenetes. Follow the following guideline to easily get started and learn quickly.
 
+#### Labels and Selectors
+
+`Labels` are key/ value pair that is used to specify attributes of cluster elements such us pods, ingress, controller,...
+
 #### Access Cluster
 
 To check what cluser your're at, type this command and see what it gives us:
@@ -84,7 +88,6 @@ kubectl proxy --port=8080
 ```
 
 *1. Access the API from a Pod*
-
 
 #### Authentication
 
@@ -489,4 +492,40 @@ Exec (Exit code), tcpSocket (connection successful), httpGet (Code 200,...)
 
 ```
 kubectl get event --watch &
+```
+
+### Examples and explanation
+
+* Create a `Deployment` with 3 `ReplicaSet`
+
+```yaml
+controllers/nginx-deployment.yaml 
+
+apiVersion: apps/v1  # api version K8s
+kind: Deployment # Type of element in k8s
+metadata:
+  name: nginx-deployment # name of deployment
+  labels:
+    app: nginx # customized labels
+spec:
+  replicas: 3 # this implement ReplicaSet which create multiple instances of `template`
+  selector: # Query 
+    matchLabels:
+      app: nginx
+  template: # Define pod
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers: # Define containers
+      - name: nginx
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
+```
+
+* Edit `Deployment`:
+
+```cli
+kubectl edit deployment.v1.apps/nginx-deployment
 ```

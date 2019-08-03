@@ -46,3 +46,15 @@ spec:
 type: ClusterIP
 ```
 
+### Limitations of Ingress Kubernetes
+
+* Have to manually config load banlancer
+* Potential Latency loading between nodes
+* Escalate cost
+* Service API cannot cater for ingress traffice network
+
+### Proxy-based Ingress Controllers
+
+* Nginx
+* Traefik
+* Contour
