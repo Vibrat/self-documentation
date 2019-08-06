@@ -46,6 +46,26 @@ spec:
 type: ClusterIP
 ```
 
+Another example of creating backend service listening on port `80`:
+
+```yaml
+apiVersion: extensions/v1beta
+kind: Ingress
+metadata: 
+  name: host-rule-ingress
+spec:
+  backend:
+    serviceName: nginx-hello-sample
+    servicePort: 80
+  rules:
+  - host: dibble.sh
+    http:
+      paths:
+      - backend:
+          serviceName: nginxhello-blue
+          servicePort: 80
+```
+
 ### Limitations of Ingress Kubernetes
 
 * Have to manually config load banlancer

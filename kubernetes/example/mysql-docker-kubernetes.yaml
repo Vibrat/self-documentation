@@ -1,0 +1,50 @@
+---
+## Create Namespace `db_test`
+apiVersion: v1
+kind: Namespace
+metadata:
+    name: db-test
+
+---
+## Create Service for load-balance
+apiVersion: v1
+kind: Service
+metadata:
+    name: app-database
+    namespace: db-test
+spec:
+    selector:
+        app: app-database
+    ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3306
+    type: NodePort
+
+---
+## Create a Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: app-database
+    namespace: db-test
+spec:
+    replicas: 2
+    selector:
+        matchLabels:
+            app: app-database
+    template:
+        metadata:
+            labels:
+                app: app-database
+        spec:
+            containers:
+            - name: app-database
+              image: mysql:5.7
+              imagePullPolicy: Always
+              ports:
+              - containerPort: 3306
+                protocol: TCP
+              env:
+              - name: MYSQL_ROOT_PASSWORD
+                value: "123456789"
