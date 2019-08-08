@@ -73,8 +73,21 @@ spec:
 * Escalate cost
 * Service API cannot cater for ingress traffice network
 
-### Proxy-based Ingress Controllers
+### Proxy-based Ingress Controllers (Ingress Class)
 
-* Nginx
-* Traefik
-* Contour
+* Nginx (--ingress-class)
+* Traefik (--kubernetes.ingressclass)
+* Contour (--ingress-class-name)
+
+#### Deploy multiple ingress controller
+
+* Object config for Contour Ingress  Controllers
+
+```yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: contour-ingress
+  annotations:
+    kubernetes.io/ingress.class: "contour"
+```
