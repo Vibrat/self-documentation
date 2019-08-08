@@ -28,7 +28,7 @@ Services can be found using environment variables bu it's recommended to let in-
 
 This sample creates a server and then assign an IP as a master cluster IP address.
 
-```kubernetes
+```yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -91,3 +91,58 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "contour"
 ```
+
+### Canary Traffic
+
+* Traekfik Example
+
+```yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: traekfik-ingress
+  annotations:
+    traefik.ingress.kubernetes.io/services-weights:
+      app: 90%
+      app-canary: 10%
+```
+
+* Step 1: Create two services, one for main applications and the another for canary
+* Step 2: Add service to ingress like this.
+
+```yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginxhello
+  annotations:
+    traefik.ingress.kubernetes.io/service-weights:
+      nginx-hello: 95%
+      nginxhello-canary: 5%
+spec:
+  rules:
+  - host: dribble.sh
+    http:
+      paths:
+      - backend:
+          serviceName: nginxhello:
+          servicePort: 80
+      - backend:
+          serviceName: nginxhello-canary
+          servicePort: 80
+```
+
+* Nginx
+
+```yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-weight: "10"
+
+```
+
+
