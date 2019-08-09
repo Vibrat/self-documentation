@@ -56,3 +56,39 @@ var Caller = function (x) {
 var caller = new Caller().add(5).show((result) => console.log(result)); // result total: 5
 ```
 
+## Observable Pattern
+
+The observable pattern works best when an object has listeners which will perform an actions based on property changes.
+
+```javascript
+
+var Caller = function () {
+    var observers = [];
+    this.total = 0;
+
+    this.add = function (x) {  
+        if (x !== undefined && x !== 0 && !isNaN(x)) {   
+            this.total += parseInt(x);
+            for (let i = 0; i < observers.length; i++) {
+                observers[i](this, this.total);
+            }
+        }
+
+        return this;
+    }
+
+    this.show = function (callback) {
+        callback(this.total);
+        return this;
+    }
+
+    this.onTotalChange = function (action) {
+        observer.push(action);
+        return this;
+    }
+}
+```
+
+## Timer Patterns
+
+
