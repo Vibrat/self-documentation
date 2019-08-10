@@ -10,7 +10,7 @@ List of what to learn:
 * Skewness and Kurtosis
 * Standard Variation
 
-![Standard Variation](./standard-variation.PNG)
+![Standard Variation](./images/standard-variation.PNG)
 
 
 
