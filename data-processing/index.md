@@ -24,7 +24,7 @@ List of what to learn:
 
 * Violin Plot
 
-![violin Plot](./images/violin-blox.PNG)
+![violin Plot](./images/violin-plot.PNG)
 
 * Strip Plot
 
