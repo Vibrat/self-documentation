@@ -12,7 +12,7 @@ List of what to learn:
 
 ![Standard Variation](./images/standard-variation.PNG)
 
-* Unvariate Distribution Plot
+## Univariate Distribution Plot
 
 * Histogram: A diagram that segment item into small chunks that can help to display distribution in groups
 
@@ -34,7 +34,7 @@ List of what to learn:
 
 ![Swarm Plot](./images/swarm-plot.PNG)
 
-* Unvariate Comparison Plot
+* Univariate Comparison Plot
 
 `Bar Chart`, `Line Chart`, `Spark Line`, `Lag Plot`
 
@@ -49,3 +49,34 @@ List of what to learn:
 ![Circular Area Chart](./images/circular-area-chart.PNG)
 
 ![Cartogram](./images/cartogram.PNG)
+
+* Univariate Composition Plot
+
+Key charts: `Pie Chart`, `Waffle Chart`, `Tree Map`, `Waterfall Chart`, ``
+
+
+![Pie Chart](./images/pie-chart.PNG)
+
+![Waffle Chart](./images/waffle-chart.PNG)
+
+![Tree Map](./images/tree-map.PNG)
+
+![Waterfall Chart](./images/waterfall-chart.PNG)
+
+## Multivariable Plot
+
+Goals of multivariable plot:
+
+* Express relations by a statistical dependence.
+* Charaterize dependence by a numerical cooficent.
+
+Measurement of Covariance:
+
+* Measure of joint probability of 2 random variables.
+* Show tendency in a linear relationship (Whether it's negative or positive).
+* Has units (Not easy to interpret strength of relationship).
+
+Covariance Calculation:
+
+![Covariance](./images/covariance.PNG)
+![Covariance Formular](./images/covariance-formular.PNG)
