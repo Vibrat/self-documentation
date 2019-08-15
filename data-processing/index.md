@@ -80,3 +80,8 @@ Covariance Calculation:
 
 ![Covariance](./images/covariance.PNG)
 ![Covariance Formular](./images/covariance-formular.PNG)
+
+Correlation Calculation:
+
+![Correlation](./images/correlation.PNG)
+
