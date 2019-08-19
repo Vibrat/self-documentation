@@ -12,6 +12,10 @@ List of what to learn:
 
 ![Standard Variation](./images/standard-variation.PNG)
 
+* Variance
+
+![Variance](./images/variance.PNG)
+
 ## Univariate Distribution Plot
 
 * Histogram: A diagram that segment item into small chunks that can help to display distribution in groups
@@ -80,8 +84,14 @@ Covariance Calculation:
 
 ![Covariance](./images/covariance.PNG)
 ![Covariance Formular](./images/covariance-formular.PNG)
+![Covariance Matrix](./images/covariance-matrix.PNG)
 
 Correlation Calculation:
 
 ![Correlation](./images/correlation.PNG)
 
+## PCA - Principle Component Analysis
+
+* Eigenvector and Eigenvectors
+
+See more: [Linear Algebra — Part 6: eigenvalues and eigenvectors](https://medium.com/sho-jp/linear-algebra-part-6-eigenvalues-and-eigenvectors-35365dc4365a)
