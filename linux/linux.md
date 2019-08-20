@@ -71,6 +71,7 @@ Use `chmod`
 chmod u+x <filename> ## Giving user execute permission
 chmod g+x <filename> ## Giving group execute permission
 chmod a+x <filename> ## Giving everyone execute permission
+chmod -R a+x <path> ## Recursively
 ```
 
 * Note-taking Script
