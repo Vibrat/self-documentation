@@ -149,3 +149,10 @@ COMBINED_DATA="Hello, $GREETING"
 $GREETING 
 ```
 
+## Create an alias 
+
+```
+## Make python 2.7 run as python 2.6 as well
+sudo ln -s /usr/bin/python2.7 /usr/bin/python2.6
+
+```
