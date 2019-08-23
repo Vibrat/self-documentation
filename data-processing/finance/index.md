@@ -44,7 +44,7 @@ a `matrix` that describe all of covariances in a `matrix`.
 
 ![Value of risk](./images/val-of-risk.PNG)  
 
-`Important` - Multi-period VaR
+`Important` - Multi-period VaR. Please remember that this is calculated based on assumption that each period is not related to each others. Also VaR ignore `skewness` and `kurtosis`.
 
 ![Multi-period VaR](./images/multi-VaR.PNG)
 
