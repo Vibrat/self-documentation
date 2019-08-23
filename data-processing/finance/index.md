@@ -42,6 +42,8 @@ a `matrix` that describe all of covariances in a `matrix`.
 
 * VaR - Value of Risk - The probability of losing something in the next trade.
 
+![Value of risk](./images/val-of-risk.PNG)
+
 ## Implementing Financial Risk Model in Python
 
 ### Calculate portfolio of variance
