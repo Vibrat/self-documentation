@@ -44,3 +44,6 @@ a `matrix` that describe all of covariances in a `matrix`.
 
 ## Implementing Financial Risk Model in Python
 
+### Calculate portfolio of variance
+
+Read more: [Here](https://medium.com/python-data/assessing-the-riskiness-of-a-portfolio-with-python-6444c727c474)
