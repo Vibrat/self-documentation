@@ -57,3 +57,15 @@ Read more: [Here](https://medium.com/python-data/assessing-the-riskiness-of-a-po
 ### Factor-based Modeling
 
 ![Factor-based Modeling](./images/factor-based-modeling.PNG)
+
+#### Systemic Variance
+
+`Systemic Variance` is used to predict outcome based on factors that affect system in general.
+
+![Systemic Variance](./images/systemic-var.png)
+
+#### Idiosyncratic Variance
+
+`Idiosyncratic Variance` is used to predict outcome that is specific to a distribution of a group of data, which can be changed by adding more data into the regression.
+
+![Idiosyncratic Variance](./images/idiosyncratic-var.png)
