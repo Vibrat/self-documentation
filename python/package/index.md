@@ -10,3 +10,6 @@ sys.path.append(<folder_module>)
 import <module>
 ```
 
+## Environment PYTHONPATH
+
+`PYTHONPATH` environment contains extensible paths to library that compiler later looks up when running.
