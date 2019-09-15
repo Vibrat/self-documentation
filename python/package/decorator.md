@@ -21,7 +21,7 @@ def deco_add_one(f):
         # Add one
         if type(result) == int:
             result  += 1
-        
+
         return result
 
     return runner # this must return a function
@@ -75,7 +75,7 @@ class Counter:
                 print ("Calling")
 
             return result
-        
+
         return runner
 
 counter_func = Counter()
@@ -85,7 +85,7 @@ def compute():
     print ("hello world")
 ```
 
-## functools.Wrap
+## functools.Wraps
 
 when you want to return a function that is wrapped by decorator. Python compiler will return a wrapper function not the original function information. Take this example:
 
