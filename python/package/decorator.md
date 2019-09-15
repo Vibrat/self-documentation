@@ -126,3 +126,34 @@ hello.__name__ # => hello
 hello.__doc__   # => `say something common`
 ```
 
+## property and setter
+
+There is a way that we can implement setter and getter in python using decorator `@property` and `.setter`. 
+
+```python
+
+class ShippingContainer:
+
+    _enable = False
+
+    def __init__(self, shipping_code):
+        self.shipping_code = shipping
+
+    @property
+    def enable(self):
+        return self._enable
+
+    @enable.setter
+    def enable(self, value):
+
+        if type(value) == bool:
+            self._enable = value
+        else:
+            raise ValueError('value is not type of bool')
+
+""" to use the class """
+container = ShippingContainer('ABCD')
+container.enable
+container.enable = True
+```
+
