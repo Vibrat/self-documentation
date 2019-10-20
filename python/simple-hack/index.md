@@ -32,6 +32,62 @@ Return:
 """
 ```
 
+### vars
+
+Method `vars` is used to get a object of attributes that associates directly to the object. The main difference between `vars` and `dir` is that dir will return a list of associated attributes on MRO of an object while `vars` will only return a object represents attributes that associates with the object directly (which mean is created or changed by from the object).
+
+```python
+
+## Class Sample
+class ClassSample:
+
+  def __init__(self):
+    pass
+
+  def say(something):
+    print(something)
+
+## Instanciate an instance,
+"""
+['__class__',
+ '__delattr__',
+ '__dict__',
+ '__dir__',
+ '__doc__',
+ '__eq__',
+ '__format__',
+ '__ge__',
+ '__getattribute__',
+ '__gt__',
+ '__hash__',
+ '__init__',
+ '__init_subclass__',
+ '__le__',
+ '__lt__',
+ '__module__',
+ '__ne__',
+ '__new__',
+ '__reduce__',
+ '__reduce_ex__',
+ '__repr__',
+ '__setattr__',
+ '__sizeof__',
+ '__str__',
+ '__subclasshook__',
+ '__weakref__',
+ 'say']
+"""
+sample = ClassSample()
+sample.b = 10
+
+## Retrieve MRO,
+dir(sample)
+
+## Retrieve, return { b: 10 }
+vars(sample)
+
+```
+
 ## Dict method
 
 ### update
