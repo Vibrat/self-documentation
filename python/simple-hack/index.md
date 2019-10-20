@@ -111,3 +111,36 @@ store.update(patch)
 pprint.pprint(store)
 ## Output: {1: 'My name is Lam', 2: 'I changed my last name to Mike'}
 ```
+
+## Object Class Method
+
+## The __slots__
+
+The attribute `__slots__`  is used to limit python class to build a mro tree reference that latter help to limit size of an object class.
+
+```python
+import sys
+
+## Normal Class
+class NormalClass:
+
+  def __init__(self, name, options):
+    self.name = name
+    self.options = options
+
+# Return: 1104 bytes
+sys.getsizeof(NormalClass) + sys.getsizeof(NormalClass)
+
+class SlotClass:
+
+  __slots__ = ['name', 'options']
+
+  def __init__(self, name, options)
+    self.name = name
+    self.options = options
+
+## Return: 888 bytes
+sys.getsizeof(SlotClass)
+```
+
+This will help to save memory in case we care about performance, but the trade off is that we cannot access to `__dir__` since we do no specify it in `__slots__`
