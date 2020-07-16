@@ -1,0 +1,14 @@
+version: "3.4"
+
+services:
+  database:
+    container_name: mysql_test
+    image: mysql:8.0
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    networks:
+      - mysql-learner
+
+networks:
+  mysql-learner:
+    external: false
