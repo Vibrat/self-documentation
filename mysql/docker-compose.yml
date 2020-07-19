@@ -4,6 +4,7 @@ services:
   slave:
     container_name: slave
     image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
     expose:
       - 9999
     environment:
@@ -14,6 +15,7 @@ services:
   master:
     container_name: master
     image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
     expose:
